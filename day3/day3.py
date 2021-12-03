@@ -38,4 +38,4 @@ for position in positions:
 print(gamma)
 print(epsilon)
 
-print(int(gamma,2)*int(epsilon,2)) #test
+print(int(gamma,2)*int(epsilon,2))
