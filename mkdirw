@@ -1,0 +1,7 @@
+#!/bin/bash
+shift
+for i in $(seq 4 24)
+do
+        #Append file to make to the end of each parameter
+        mv day$i/day.txt day$i/day${i}sample.txt
+done
