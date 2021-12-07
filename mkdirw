@@ -1,7 +1,7 @@
 #!/bin/bash
-shift
+#shift
 for i in $(seq 4 24)
 do
         #Append file to make to the end of each parameter
-        mv day$i/day.txt day$i/day${i}sample.txt
+        echo "inputfile = open('day${i}/day${i}.txt', 'r')" >  day$i/day${i}.py
 done
