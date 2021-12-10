@@ -1,9 +1,9 @@
-inputfile = open('day4/day4sample.txt', 'r')
+inputfile = open('day4/day4.txt', 'r')
 
 
 paths=[]
 answer=0
-
+positions=["0,0-0"]
 for inp in inputfile:
     fromvalue = inp.split()[0]
     tovalue = inp.split()[2]
@@ -56,16 +56,16 @@ for inp in inputfile:
             currenty-=1
         
         currentvalue=str(currentx)+","+str(currenty)
-        path.append(currentvalue)
+        paths.append(currentvalue)
         i+=1
         if i>pathlength:
             running=False
-    paths.append(path)
+    #paths.append(path)
 
 
 print(paths)
 
-positions=["0,0-0"]
+
 for path in paths:
     for position in path:
         found=False
@@ -77,6 +77,7 @@ for path in paths:
                 visitedposvalue = visitedposvalue + 1
                 positions[i]=visitedposPosition+"-"+str(visitedposvalue)
                 if visitedposvalue == 2:
+                    print(positions[i])
                     answer+=1
         if not found:
             positions.append(position+"-1")

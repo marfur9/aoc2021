@@ -3,7 +3,8 @@ inputfile = open('day4/day4.txt', 'r')
 
 paths=[]
 answer=0
-
+positions=["0,0-0"]
+i=0
 for inp in inputfile:
     fromvalue = inp.split()[0]
     tovalue = inp.split()[2]
@@ -11,6 +12,7 @@ for inp in inputfile:
     fromy = fromvalue.split(',')[1]
     tox = tovalue.split(',')[0]
     toy = tovalue.split(',')[1]
+    
 
     path = []
     ylength=0
@@ -45,7 +47,7 @@ for inp in inputfile:
         currentvalue=fromvalue
         currentx=int(fromx)
         currenty=int(fromy)
-        path.append(currentvalue)
+        paths.append(currentvalue)
         while(running):
             if xascending and not xstill:
                 currentx+=1
@@ -57,28 +59,69 @@ for inp in inputfile:
                 currenty-=1
         
             currentvalue=str(currentx)+","+str(currenty)
-            path.append(currentvalue)
+            paths.append(currentvalue)
             i+=1
             if i>pathlength:
                 running=False
-        paths.append(path)
 
+        """ running=True
+        
+        currentvalue=fromvalue
+        currentx=int(fromx)
+        currenty=int(fromy)
+        firstValue=True
+        while(running):
+            if firstValue:
+                firstValue=False
+            else:
+                if xascending and not xstill:
+                    currentx+=1
+                elif not xascending and not xstill:
+                    currentx-=1
+                if yascending and not ystill:
+                    currenty+=1
+                elif not yascending and not ystill:
+                    currenty-=1
+        
+            currentvalue=str(currentx)+","+str(currenty)
+            paths.append(currentvalue)
+            
+            if currentvalue==tovalue:
+                running=False
+                print(i)
+                i+=1 """
+        #paths.append(path)
+    #endofif
 print("part 1 done")
 
-positions=["0,0-0"]
-for path in paths:
-    for position in path:
-        found=False
-        for i, visitedpos in enumerate(positions):
-            visitedposPosition=visitedpos.split("-")[0]
-            visitedposvalue=int(visitedpos.split("-")[1])
-            if visitedpos.split("-")[0] == position:
-                found=True
-                visitedposvalue = visitedposvalue + 1
-                positions[i]=visitedposPosition+"-"+str(visitedposvalue)
-                if visitedposvalue == 2:
-                    answer+=1
-        if not found:
-            positions.append(position+"-1")
+for position in paths:
+    found=False
+    for i, visitedpos in enumerate(positions):
+        visitedposPosition=visitedpos.split("-")[0]
+        visitedposvalue=int(visitedpos.split("-")[1])
+        if visitedpos.split("-")[0] == position:
+            found=True
+            visitedposvalue = visitedposvalue + 1
+            positions[i]=visitedposPosition+"-"+str(visitedposvalue)
+            if visitedposvalue == 2:
+                answer+=1
+            break
+    if not found:
+        positions.append(position+"-1")
+
+#for path in paths:
+    #for position in path:
+        #found=False
+        #for i, visitedpos in enumerate(positions):
+            #visitedposPosition=visitedpos.split("-")[0]
+            #visitedposvalue=int(visitedpos.split("-")[1])
+            #if visitedpos.split("-")[0] == position:
+                #found=True
+                #visitedposvalue = visitedposvalue + 1
+                #positions[i]=visitedposPosition+"-"+str(visitedposvalue)
+                #if visitedposvalue == 2:
+                    #answer+=1
+        #if not found:
+#            positions.append(position+"-1")
 print(answer)
 print("part 2 done")
